@@ -1,0 +1,17 @@
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: hostel_laundry_mongodb
+    restart: unless-stopped
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:-secretpassword123}
+      MONGO_INITDB_DATABASE: ${MONGO_DB_NAME:-laundry_db}
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
+    name: hostel_laundry_mongodb_data
